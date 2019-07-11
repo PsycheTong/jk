@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+	  <meta charset="utf-8">
+	  <link rel="stylesheet" type="text/css" href="./css/style.css">
+	  <link rel="stylesheet" type="text/css" href="./css/style1.css">
+	  <link rel="stylesheet" type="text/css" href="./css/cs-select.css">
+	  <link rel="stylesheet" type="text/css" href="./css/cs-skin-black.css">
+	  <script type="text/javascript" src="http://61.189.20.113:8000/VectorMapAbility/jssdk/auth?v=2.0&key=1234&name=bundle"></script>
+	  <script src="./js/vue.min.js"></script>
+	  <script src="./js/classie.js"></script>
+	  <script src="./js/selectFx.js"></script>
+	  <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.js"></script>
+	  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+	  <script type="text/javascript" src="./js/app.js"></script>
+	  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+</head>
+<body>
+<div id="app" class="box">
+	<div class="leftpanel">
+		<div class="cell" v-on:click = "changeCell('覆盖与实装率')">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">覆盖与实装率</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item btn-hover" >
+							<span v-on:click="changePie('COVER_COUNT')">覆盖家庭户数</span>
+							<span>{{cover_count===""?0:cover_count}}户</span>
+						</div>
+						<div class="item">
+							<span>家庭覆盖率</span>
+							<span>{{cover_rate===""?0:cover_rate}}%</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cell" v-on:click = "changeCell('宽带电视')">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">宽带电视</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span class = "btn-hover" v-on:click="changePie('MBH_CNT')">宽带电视到达用户数</span>
+							<span>{{mbh_cnt===""?0:mbh_cnt}}户</span>
+						</div>
+						<div class="item">
+							<span>宽带电视渗透率</span>
+							<span>{{mbh_st_rate===""?0:mbh_st_rate}}%</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cell" v-on:click = "changeCell('客户数')">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">客户数</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span class = "btn-hover" v-on:click="changePie('N_NEW_DK_CNT')" >单宽本年累计</span>
+							<span>{{n_new_dk_cnt===""?0:n_new_dk_cnt}}户</span>
+						</div>
+						<div class="item">
+							<span class = "btn-hover" v-on:click="changePie('HOME_CNT')">综合本年累计</span>
+							<span>{{home_cnt===""?0:home_cnt}}户</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cell" v-on:click = "changeCell('增值产品')">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">增值产品</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span class = "btn-hover" v-on:click="changePie('HEMU_NEW_CNT')">增值产品用户数</span>
+							<span>{{hemu_new_cnt===""?0:hemu_new_cnt}}户</span>
+						</div>
+						<div class="item">
+							<span class = "btn-hover" v-on:click="changePie('DD_OFF_CUT')">离线用户数</span>
+							<span>{{dd_off_cnt===""?0:dd_off_cnt}}户</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="rightpanel">
+		<div class="cell" v-on:click = "changeCell('收入')">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">收入</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span class = "btn-hover" v-on:click="changePie('NEW_ARPU')">本月新增</span>
+							<span>{{new_arpu===""?0:hemu_new_cnt}}元</span>
+						</div>
+						<div class="item">
+							<span class = "btn-hover" v-on:click="changePie('ARPU')">累计到达</span>
+							<span>{{arpu===""?0:arpu}}元</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+	    <div class="cell" v-on:click = "changeCell('离网率')">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">离网率</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span class = "btn-hover" v-on:click="changePie('Y_LW_CNT')">本月离网</span>
+							<span>{{y_lw_cnt===""?0:y_lw_cnt}}户</span>
+						</div>
+						<div class="item">
+							<span>本月离网率</span>
+							<span>{{lw_rate===""?0:lw_rate}}%</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+		 <div class="cell">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">{{current_cell}}</p>
+			</div>
+			<div class="container special-container">
+				<div id = "tag-bar" class="content special-content" >
+						<div class="item" v-on:click="changePie('TYPE')" v-if="bool_arr.bool_type	                 "><span>1、小区、2县区、3地市（包括999省中心）                                            </span><span class="orangetext">{{type	                ===""?0:type	              }}户</span>	</div>
+						<div class="item" v-on:click="changePie('ID')" v-if="bool_arr.bool_id	                     "><span>粒度编码	                                            </span><span class="orangetext">{{id	                ===""?0:id	                  }}户</span>	</div>
+						<div class="item" v-on:click="changePie('NAME')" v-if="bool_arr.bool_name	                 "><span>粒度	                                            </span><span class="orangetext">{{name	                ===""?0:name	              }}户</span>	</div>
+						<div class="item" v-on:click="changePie('COVER_COUNT')" v-if="bool_arr.bool_cover_count"><span>覆盖家庭户数	                                            </span><span class="orangetext">{{cover_count	        ===""?0:cover_count	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('ONU_PORT')" v-if="bool_arr.bool_onu_port	             "><span>设备端口数	                                            </span><span class="orangetext">{{onu_port	            ===""?0:onu_port	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('ONU_USED_PORT')" v-if="bool_arr.bool_onu_used_port	         "><span>占用端口数	                                            </span><span class="orangetext">{{onu_used_port	    ===""?0:onu_used_port	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('COVER_RATE')" v-if="bool_arr.bool_cover_rate	             "><span>家庭覆盖率	                                            </span><span class="orangetext">{{cover_rate	        ===""?0:cover_rate	          }}%</span>	</div>
+						<div class="item" v-on:click="changePie('PORT_COVER_RATE')" v-if="bool_arr.bool_port_cover_rate	     "><span>端口覆盖率	                                            </span><span class="orangetext">{{port_cover_rate	    ===""?0:port_cover_rate	      }}%</span>	</div>
+						<div class="item" v-on:click="changePie('CELL_USER_RATE')" v-if="bool_arr.bool_cell_user_rate	         "><span>客户实装率	                                            </span><span class="orangetext">{{cell_user_rate	    ===""?0:cell_user_rate	      }}%</span>	</div>
+						<div class="item" v-on:click="changePie('POS_USER_RATE')" v-if="bool_arr.bool_pos_user_rate	         "><span>端口实装率	                                            </span><span class="orangetext">{{pos_user_rate	    ===""?0:pos_user_rate	      }}%</span>	</div>
+						<div class="item" v-on:click="changePie('HOME_CNT')" v-if="bool_arr.bool_home_cnt	             "><span>移动到达客户数	                                            </span><span class="orangetext">{{home_cnt	            ===""?0:home_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('HOME_LIGHT_CNT')" v-if="bool_arr.bool_home_light_cnt	         "><span>光客户数	                                            </span><span class="orangetext">{{home_light_cnt	    ===""?0:home_light_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('R_NEW_DK_CNT')" v-if="bool_arr.bool_r_new_dk_cnt	         "><span>单宽	日新增                                            </span><span class="orangetext">{{r_new_dk_cnt	        ===""?0:r_new_dk_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('R_NEW_FUSE_CNT')" v-if="bool_arr.bool_r_new_fuse_cnt	         "><span>融合	                                            </span><span class="orangetext">{{r_new_fuse_cnt	    ===""?0:r_new_fuse_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('R_NEW_100_CNT')" v-if="bool_arr.bool_r_new_100_cnt	         "><span>100m以下	                                            </span><span class="orangetext">{{r_new_100_cnt	    ===""?0:r_new_100_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('R_NEW_100_200_CNT')" v-if="bool_arr.bool_r_new_100_200_cnt	     "><span>100m-200m（不含200m）	                                            </span><span class="orangetext">{{r_new_100_200_cnt	===""?0:r_new_100_200_cnt	  }}户</span>	</div>
+						<div class="item" v-on:click="changePie('R_NEW_200_CNT')" v-if="bool_arr.bool_r_new_200_cnt	         "><span>200m及以上	                                            </span><span class="orangetext">{{r_new_200_cnt	    ===""?0:r_new_200_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('R_NEW_CNT')" v-if="bool_arr.bool_r_new_cnt	             "><span>合计	                                            </span><span class="orangetext">{{r_new_cnt	        ===""?0:r_new_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('Y_NEW_DK_CNT')" v-if="bool_arr.bool_y_new_dk_cnt	         "><span>单宽	月新增                                            </span><span class="orangetext">{{y_new_dk_cnt	        ===""?0:y_new_dk_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('Y_NEW_FUSE_CNT')" v-if="bool_arr.bool_y_new_fuse_cnt	         "><span>融合	                                            </span><span class="orangetext">{{y_new_fuse_cnt	    ===""?0:y_new_fuse_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('Y_NEW_100_CNT')" v-if="bool_arr.bool_y_new_100_cnt	         "><span>100m以下	                                            </span><span class="orangetext">{{y_new_100_cnt	    ===""?0:y_new_100_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('Y_NEW_100_200_CNT')" v-if="bool_arr.bool_y_new_100_200_cnt	     "><span>100m-200m（不含200m）	                                            </span><span class="orangetext">{{y_new_100_200_cnt	===""?0:y_new_100_200_cnt	  }}户</span>	</div>
+						<div class="item" v-on:click="changePie('Y_NEW_200_CNT')" v-if="bool_arr.bool_y_new_200_cnt	         "><span>200m及以上	                                            </span><span class="orangetext">{{y_new_200_cnt	    ===""?0:y_new_200_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('Y_NEW_CNT')" v-if="bool_arr.bool_y_new_cnt	             "><span>合计	                                            </span><span class="orangetext">{{y_new_cnt	        ===""?0:y_new_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('N_NEW_DK_CNT')" v-if="bool_arr.bool_n_new_dk_cnt	         "><span>单宽	年新增                                            </span><span class="orangetext">{{n_new_dk_cnt	        ===""?0:n_new_dk_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('N_NEW_FUSE_CNT')" v-if="bool_arr.bool_n_new_fuse_cnt	         "><span>融合	                                            </span><span class="orangetext">{{n_new_fuse_cnt	    ===""?0:n_new_fuse_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('N_NEW_100_CNT')" v-if="bool_arr.bool_n_new_100_cnt	         "><span>100m以下	                                            </span><span class="orangetext">{{n_new_100_cnt	    ===""?0:n_new_100_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('N_NEW_100_200_CNT')" v-if="bool_arr.bool_n_new_100_200_cnt	     "><span>100m-200m（不含200m）	                                            </span><span class="orangetext">{{n_new_100_200_cnt	===""?0:n_new_100_200_cnt	  }}户</span>	</div>
+						<div class="item" v-on:click="changePie('N_NEW_200_CNT')" v-if="bool_arr.bool_n_new_200_cnt	         "><span>200m及以上	                                            </span><span class="orangetext">{{n_new_200_cnt	    ===""?0:n_new_200_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('N_NEW_CNT')" v-if="bool_arr.bool_n_new_cnt	             "><span>合计	                                            </span><span class="orangetext">{{n_new_cnt	        ===""?0:n_new_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('DD_DK_CNT')" v-if="bool_arr.bool_dd_dk_cnt	             "><span>单宽	到达                                            </span><span class="orangetext">{{dd_dk_cnt	        ===""?0:dd_dk_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('DD_FUSE_CNT')" v-if="bool_arr.bool_dd_fuse_cnt	         "><span>融合	                                            </span><span class="orangetext">{{dd_fuse_cnt	        ===""?0:dd_fuse_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('DD_20_CNT')" v-if="bool_arr.bool_dd_20_cnt	             "><span>20m以下	                                            </span><span class="orangetext">{{dd_20_cnt	        ===""?0:dd_20_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('DD_20_50_CNT')" v-if="bool_arr.bool_dd_20_50_cnt	         "><span>20m-50m（不含50m）	                                            </span><span class="orangetext">{{dd_20_50_cnt	        ===""?0:dd_20_50_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('DD_50_100_CNT')" v-if="bool_arr.bool_dd_50_100_cnt	         "><span>50m-100m（不含100m）	                                            </span><span class="orangetext">{{dd_50_100_cnt	    ===""?0:dd_50_100_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('DD_100_200_CNT')" v-if="bool_arr.bool_dd_100_200_cnt	         "><span>100m-200m（不含200m）	                                            </span><span class="orangetext">{{dd_100_200_cnt	    ===""?0:dd_100_200_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('DD_200_CNT')" v-if="bool_arr.bool_dd_200_cnt	             "><span>200m及以上	                                            </span><span class="orangetext">{{dd_200_cnt	        ===""?0:dd_200_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('DD_HOME_CNT')" v-if="bool_arr.bool_dd_home_cnt	         "><span>合计	                                            </span><span class="orangetext">{{dd_home_cnt	        ===""?0:dd_home_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('DD_ACT_CNT')" v-if="bool_arr.bool_dd_act_cnt	             "><span>活跃客户数	其他                                            </span><span class="orangetext">{{dd_act_cnt	        ===""?0:dd_act_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('ACT_RATE')" v-if="bool_arr.bool_act_rate	             "><span>月活跃度	                                            </span><span class="orangetext">{{act_rate	            ===""?0:act_rate	          }}%</span>	</div>
+						<div class="item" v-on:click="changePie('PJ_ACT_RATE')" v-if="bool_arr.bool_pj_act_rate	         "><span>月均活跃度	                                            </span><span class="orangetext">{{pj_act_rate	        ===""?0:pj_act_rate	          }}%</span>	</div>
+						<div class="item" v-on:click="changePie('NEW_100_RATE')" v-if="bool_arr.bool_new_100_rate            "><span>新增100m及以上占比	                                            </span><span class="orangetext">{{new_100_rate         ===""?0:new_100_rate          }}%</span>	</div>
+						<div class="item" v-on:click="changePie('DD_100_RATE')" v-if="bool_arr.bool_dd_100_rate	         "><span>存量100m及以上占比	                                            </span><span class="orangetext">{{dd_100_rate	        ===""?0:dd_100_rate	          }}%</span>	</div>
+						<div class="item" v-on:click="changePie('NEW_FUSE_RATE')" v-if="bool_arr.bool_new_fuse_rate	         "><span>新增融合占比	                                            </span><span class="orangetext">{{new_fuse_rate	    ===""?0:new_fuse_rate	      }}%</span>	</div>
+						<div class="item" v-on:click="changePie('DD_FUSE_RATE')" v-if="bool_arr.bool_dd_fuse_rate	         "><span>存量融合占比	                                            </span><span class="orangetext">{{dd_fuse_rate	        ===""?0:dd_fuse_rate	      }}%</span>	</div>
+						<div class="item" v-on:click="changePie('NEW_KD_SHOULD_FEE')" v-if="bool_arr.bool_new_kd_should_fee	     "><span>单宽	经分：本月新增                                            </span><span class="orangetext">{{new_kd_should_fee	===""?0:new_kd_should_fee	  }}元</span>	</div>
+						<div class="item" v-on:click="changePie('NEW_FT_FEE')" v-if="bool_arr.bool_new_ft_fee	             "><span>融合	                                            </span><span class="orangetext">{{new_ft_fee	        ===""?0:new_ft_fee	          }}元</span>	</div>
+						<div class="item" v-on:click="changePie('NEW_ARPU')" v-if="bool_arr.bool_new_arpu	             "><span>合计	                                            </span><span class="orangetext">{{new_arpu	            ===""?0:new_arpu	          }}元</span>	</div>
+						<div class="item" v-on:click="changePie('KD_SHOULD_FEE')" v-if="bool_arr.bool_kd_should_fee	         "><span>单宽	经分：到达                                            </span><span class="orangetext">{{kd_should_fee	    ===""?0:kd_should_fee	      }}元</span>	</div>
+						<div class="item" v-on:click="changePie('FT_FEE')" v-if="bool_arr.bool_ft_fee	                 "><span>融合	                                            </span><span class="orangetext">{{ft_fee	            ===""?0:ft_fee	              }}元</span>	</div>
+						<div class="item" v-on:click="changePie('ARPU')" v-if="bool_arr.bool_arpu	                 "><span>合计	                                            </span><span class="orangetext">{{arpu	                ===""?0:arpu	              }}元</span>	</div>
+						<div class="item" v-on:click="changePie('MBH_CNT')" v-if="bool_arr.bool_mbh_cnt	             "><span>宽带电视到达用户数 	                                            </span><span class="orangetext">{{mbh_cnt	            ===""?0:mbh_cnt	              }}户</span>	</div>
+						<div class="item" v-on:click="changePie('MBH_ST_RATE')" v-if="bool_arr.bool_mbh_st_rate	         "><span>宽带电视渗透率	                                            </span><span class="orangetext">{{mbh_st_rate	        ===""?0:mbh_st_rate	          }}%</span>	</div>
+						<div class="item" v-on:click="changePie('D_MBH_NEW_CNT')" v-if="bool_arr.bool_d_mbh_new_cnt	         "><span>宽带电视本日新增用户数	                                            </span><span class="orangetext">{{d_mbh_new_cnt	    ===""?0:d_mbh_new_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('Y_MBH_NEW_CNT')" v-if="bool_arr.bool_y_mbh_new_cnt	         "><span>宽带电视本月新增用户数	                                            </span><span class="orangetext">{{y_mbh_new_cnt	    ===""?0:y_mbh_new_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('Y_JJ_MBH_CNT')" v-if="bool_arr.bool_y_jj_mbh_cnt	         "><span>宽带电视本月净增用户数	                                            </span><span class="orangetext">{{y_jj_mbh_cnt	        ===""?0:y_jj_mbh_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('N_JJ_MBH_CNT')" v-if="bool_arr.bool_n_jj_mbh_cnt	         "><span>宽带电视本年净增用户数	                                            </span><span class="orangetext">{{n_jj_mbh_cnt	        ===""?0:n_jj_mbh_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('MBH_ACTIVATION_RATE')" v-if="bool_arr.bool_mbh_activation_rate	 "><span>宽带电视激活度	                                            </span><span class="orangetext">{{mbh_activation_rate	===""?0:mbh_activation_rate	  }}%</span>	</div>
+						<div class="item" v-on:click="changePie('Y_MBH_ACTIVATION_RATE')" v-if="bool_arr.bool_y_mbh_activation_rate	 "><span>当月新增激活率	                                            </span><span class="orangetext">{{y_mbh_activation_rate===""?0:y_mbh_activation_rate }}%</span>	</div>
+						<div class="item" v-on:click="changePie('MBH_ACTIVE_RATE')" v-if="bool_arr.bool_mbh_active_rate	     "><span>宽带电视活跃度	                                            </span><span class="orangetext">{{mbh_active_rate	    ===""?0:mbh_active_rate	      }}%</span>	</div>
+						<div class="item" v-on:click="changePie('MBH_FEE')" v-if="bool_arr.bool_mbh_fee	             "><span>宽带电视本月收入	                                            </span><span class="orangetext">{{mbh_fee	            ===""?0:mbh_fee	              }}元</span>	</div>
+						<div class="item" v-on:click="changePie('LJ_MBH_FEE')" v-if="bool_arr.bool_lj_mbh_fee	             "><span>宽带电视累计收入	                                            </span><span class="orangetext">{{lj_mbh_fee	        ===""?0:lj_mbh_fee	          }}元</span>	</div>
+						<div class="item" v-on:click="changePie('HEMU_CNT')" v-if="bool_arr.bool_hemu_cnt	             "><span>和目本月新增	                                            </span><span class="orangetext">{{hemu_cnt	            ===""?0:hemu_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('HEMU_NEW_CNT')" v-if="bool_arr.bool_hemu_new_cnt	         "><span>和目客户到达	                                            </span><span class="orangetext">{{hemu_new_cnt	        ===""?0:hemu_new_cnt	      }}户</span>	</div>
+						<div class="item" v-on:click="changePie('TEL_CNT')" v-if="bool_arr.bool_tel_cnt                 "><span>      固话客户本月新增	                                            </span><span class="orangetext">{{tel_cnt              ===""?0:tel_cnt               }}户</span>	</div>
+						<div class="item" v-on:click="changePie('TEL_NEW_CNT')" v-if="bool_arr.bool_tel_new_cnt             "><span>     固话客户到达	                                            </span><span class="orangetext">{{tel_new_cnt          ===""?0:tel_new_cnt           }}户</span>	</div>
+						<div class="item" v-on:click="changePie('Y_LW_CNT')" v-if="bool_arr.bool_y_lw_cnt	             "><span>本月离网	                                            </span><span class="orangetext">{{y_lw_cnt	            ===""?0:y_lw_cnt	          }}户</span>	</div>
+						<div class="item" v-on:click="changePie('LW_RATE')" v-if="bool_arr.bool_lw_rate	             "><span>本月离网率	                                            </span><span class="orangetext">{{lw_rate	            ===""?0:lw_rate	              }}%</span>	</div>
+						<div class="item" v-on:click="changePie('DD_OFF_CNT')" v-if="bool_arr.bool_dd_off_cnt              "><span>              离线用户数                                            </span><span class="orangetext">{{dd_off_cnt           ===""?0:dd_off_cnt            }}户</span>	</div>
+						<div class="item" v-on:click="changePie('PORT_CONVER_RATE')" v-if="bool_arr.bool_port_conver_rate        "><span>        端口覆盖率                                            </span><span class="orangetext">{{port_conver_rate     ===""?0:port_conver_rate      }}%</span>	</div>
+						
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="middlepanel">
+		<div class="middleContainer">
+			<div class="cornerkuangbox">
+				<div class="allborder"></div>
+				<div class="lefttop size_1"></div>
+				<div class="leftbottom size_1"></div>
+				<div class="righttop size_1"></div>
+				<div class="rightbottom size_1"></div>
+			</div>
+			<div class="mapContainer">
+				<div id="map"></div>
+			</div>
+			<div v-if="isshowchart" class="chartbox">
+				<div class="charttile">占比分析</div>
+					<div class="chartContainer">
+						<div id = "chartContent" class="chartContent">
+							
+						</div>
+					</div>
+			</div>
+			<div class="tab">
+				<div v-on:click="handleTabClick(1)" v-bind:class="{orangetext:status===1 }">省级视图</div>
+				<div v-on:click="handleTabClick(2)" v-bind:class="{ orangetext:status===2}">市级视图</div>
+				<div v-on:click="handleTabClick(3)" v-bind:class="{ orangetext:status===3}">区级视图</div>
+			</div>
+			<div  v-show="status===3" class="searchbox">
+				<div class="cornerkuangbox">
+					<div class="allborder"></div>
+					<div class="lefttop size_2"></div>
+					<div class="leftbottom size_2"></div>
+					<div class="righttop size_2"></div>
+					<div class="rightbottom size_2"></div>
+				</div>
+				<div  class="searchContainer">
+					<div class="selectbox">
+						<select id="sel_city" v-model="cityCode" class="cs-select cs-skin-border">
+							<option value="210100">沈阳市</option>
+							<option value="210200">大连市</option>
+							<option value="210300">鞍山市</option>
+							<option value="210400">抚顺市</option>
+							<option value="210500">本溪市</option>
+							<option value="210600">丹东市</option>
+							<option value="210700">锦州市</option>
+							<option value="210800">营口市</option>
+							<option value="210900">阜新市</option>
+							<option value="211000">辽阳市</option>
+							<option value="211100">盘锦市</option>
+							<option value="211200">铁岭市</option>
+							<option value="211300">朝阳市</option>
+							<option value="211400">葫芦岛市</option>
+						</select>
+						<select id="sel_dist" v-model="districtcode" class="cs-select cs-skin-border">
+							<option v-for="dist in distdetails[cityCode]" :value="dist.adcode">{{dist.name}}</option>
+						</select>
+					</div>
+					<div class="searchbar">
+						<input v-model="house" />
+						<a v-on:click="searchHourse" class="btn"><img src="./image/search.png"/></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom_stripes">
+			<img class="stripesimg" src="./image/bottom_stripes.png"></img>
+		</div>
+	</div>
+	<div v-show="istoast" class="native-toast native-toast-bottom native-toast-success native-toast-shown">{{toastmsg}}</div>
+</div>
+<script type="text/javascript" src="./js/ui.js"></script>
+<script type="text/javascript" src="http://js.mlocso.com:9091/SDKService/jssdk/plugin?v=1.1&name=CMMap.PoiSearch&rid=879625"></script>
+<script>
+    
+</script>
+</body>
+</html>

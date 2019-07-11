@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	  <meta charset="utf-8">
+	  	  <meta charset="utf-8">
+	  <link rel="stylesheet" type="text/css" href="./css/style.css">
+	  <style type="text/css">
+		.mapContainer {
+			width: 100%;
+			height: 1300px;
+		}
+	  </style>
+
+</head>
+<body>
+
+<div id="app" class="box">
+	<div class="leftpanel">
+		<div class="leftContainer">
+			<div class="cell">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">覆盖与实装率</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span>覆盖家庭户数</span>
+							<span>{{cover_count===""?0:cover_count}}户</span>
+						</div>
+						<div class="item">
+							<span>覆盖覆盖率</span>
+							<span>{{cover_rate===""?0:cover_rate}}%</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cell">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">宽带电视</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span>宽带电视到达用户数</span>
+							<span>{{mbh_cnt===""?0:mbh_cnt}}户</span>
+						</div>
+						<div class="item">
+							<span>宽带电视渗透率</span>
+							<span>{{mbh_st_rate===""?0:mbh_st_rate}}%</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cell">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">客户数</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span>单宽本年累计</span>
+							<span>{{n_new_dk_cnt===""?0:n_new_dk_cnt}}户</span>
+						</div>
+						<div class="item">
+							<span>综合本年累计</span>
+							<span>{{home_cnt===""?0:home_cnt}}户</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cell">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">增值产品</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span>增值产品用户数</span>
+							<span>{{hemu_new_cnt===""?0:hemu_new_cnt}}户</span>
+						</div>
+						<div class="item">
+							<span>离线用户数</span>
+							<span>{{dd_off_cnt===""?0:dd_off_cnt}}户</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		
+	</div>
+	<div class="rightpanel">
+		<div class="cell">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">收入</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span>本月新增</span>
+							<span>{{new_appu===""?0:hemu_new_cnt}}元</span>
+						</div>
+						<div class="item">
+							<span>累计到达</span>
+							<span>{{appu===""?0:appu}}元</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+	    <div class="cell">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">离网率</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span>本月离网</span>
+							<span>{{y_lw_cnt===""?0:y_lw_cnt}}户</span>
+						</div>
+						<div class="item">
+							<span>本月离网率</span>
+							<span>{{lw_rate===""?0:lw_rate}}%</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+		 <div class="cell">
+			<div class="head">
+				<img class="hbg" src="./image/head_bg.png"></img>
+				<p class="htitle">覆盖与实装率</p>
+			</div>
+			<div class="container">
+				<div class="content">
+						<div class="item">
+							<span>覆盖家庭户数</span>
+							<span class="orangetext">{{cover_count===""?0:cover_count}}户</span>
+						</div>
+						<div class="item">
+							<span>设备端口数</span>
+							<span class="orangetext">{{onu_port===""?0:onu_port}}个</span>
+						</div>
+						<div class="item">
+							<span>占用端口数</span>
+							<span class="orangetext">{{onu_user_port===""?0:onu_user_port}}个</span>
+						</div>
+						<div class="item">
+							<span>家庭覆盖率</span>
+							<span class="orangetext">{{cover_rate===""?0:cover_rate}}%</span>
+						</div>
+						<div class="item">
+							<span>客户实装率</span>
+							<span class="orangetext">{{cell_user_rate===""?0:cell_user_rate}}%</span>
+						</div>
+						<div class="item">
+							<span>端口覆盖率</span>
+							<span class="orangetext">{{post_conver_rate===""?0:post_conver_rate}}%</span>
+						</div>
+						<div class="item">
+							<span>端口实装率</span>
+							<span class="orangetext">{{pos_user_rate===""?0:pos_user_rate}}%</span>
+						</div>
+				</div>
+				<div class="kuangbox">
+					<div class="leftborder"></div>
+					<div class="rightborder"></div>
+					<div class="bottomborder">
+						<img class="img" src="./image/bottom_kuang.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="middlepanel">
+	</div>
+</div>
+</body>
+</html>
